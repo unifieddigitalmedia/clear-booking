@@ -53,6 +53,7 @@
     "npm": "^3.x",
     "q": "latest",
     "request": "latest",
+    "sendgrid": "^2.0.0",
     "shelljs": "latest",
     "view-helpers": "latest"
   },

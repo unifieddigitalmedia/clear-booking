@@ -41,3 +41,36 @@ app.listen(port, function () {
   console.log('Example app listening on port 5000!');
 
 });
+
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(bodyParser.json());
+
+
+app.get('/api/sendemail/', function (req, res) {
+
+
+var sendgrid  = require('sendgrid')(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD);
+
+
+sendgrid.send({
+  to:       req.query.email,
+  from:     'machel.slack@unifieddigitalmedia.co.uk',
+  cc: 'machel.slack@unifieddigitalmedia.co.uk',
+  subject:  req.query.subject,
+  text:     req.query.message
+
+}, function(err, json) {
+
+  if (err) { return console.error(err); }
+  
+
+  console.log(json);
+
+});
+
+
+});
+
